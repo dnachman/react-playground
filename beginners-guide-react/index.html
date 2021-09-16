@@ -1,25 +1,98 @@
 <html>
 
 <head>
+	<!-- Bootstrap 4 Styling -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+		integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<!-- FontAwesome Icons -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="styles.css">
 	<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
 	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 
 <body>
-	<div id="root"></div>
+
+	<div class="content">
+		<div id="root"></div>
+	</div>
 
 	<script type="text/babel">
 
-		class HelloWorld extends React.Component {
+class LikeIcon extends React.Component {
+  render() {
+    return (
+      <div>
+        <span className="fa-stack fa-sm">
+          <i className="fa fa-circle fa-stack-2x blue-icon" />
+          <i className="fa fa-thumbs-up fa-stack-1x fa-inverse" />
+        </span>
+      </div>
+    )
+  }
+}
+
+class Like extends React.Component {
+  render() {
+    return (
+      <div>
+        {/* Include the LikeIcon subcomponent within the Like component*/}
+        <LikeIcon />
+        <hr />
+        <div>
+          <button type="button">
+            <i
+              className="fa fa-thumbs-o-up fa-4 align-middle"
+              aria-hidden="true"
+            />
+            &nbsp;
+            <span className="align-middle">Like</span>
+          </button>
+        </div>
+      </div>
+    )
+  }
+}
+		class Comment extends React.Component {
 			render() {
-				// Tells React what HTML code to render
-				return <h1>Hello World</h1>
+				return (
+					<div>
+						<textarea className="form-control" placeholder="Write a comment..." />
+						<small>140 Remaining</small>
+					</div>
+				)
 			}
 		}
-		
-		// Tells React to attach the HelloWorld component to the 'root' HTML div
-		ReactDOM.render(<HelloWorld />, document.getElementById("root"))
+
+		class Status extends React.Component {
+			render() {
+				return (
+					<div className="col-6 offset-3">
+						<div className="card">
+							<div className="card-block">
+								<div className="row">
+									<div className="col-10 profile-row">
+										<div className="row">
+											<a href="#">The Zen of Programming</a>
+										</div>
+										<div className="row">
+											<small className="post-time">10 mins</small>
+										</div>
+									</div>
+								</div>
+								<Like />
+							</div>
+							<div className="card-footer text-muted">
+								<Comment />
+							</div>
+						</div>
+					</div>
+				)
+			}
+		}
+
+		ReactDOM.render(<Status />, document.getElementById("root"))
 	</script>
 </body>
 
