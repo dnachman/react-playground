@@ -20,46 +20,80 @@
 
 	<script type="text/babel">
 
-class LikeIcon extends React.Component {
-  render() {
-    return (
-      <div>
-        <span className="fa-stack fa-sm">
-          <i className="fa fa-circle fa-stack-2x blue-icon" />
-          <i className="fa fa-thumbs-up fa-stack-1x fa-inverse" />
-        </span>
-      </div>
-    )
-  }
-}
-
-class Like extends React.Component {
-  render() {
-    return (
-      <div>
-        {/* Include the LikeIcon subcomponent within the Like component*/}
-        <LikeIcon />
-        <hr />
-        <div>
-          <button type="button">
-            <i
-              className="fa fa-thumbs-o-up fa-4 align-middle"
-              aria-hidden="true"
-            />
-            &nbsp;
-            <span className="align-middle">Like</span>
-          </button>
-        </div>
-      </div>
-    )
-  }
-}
-		class Comment extends React.Component {
+		class LikeIcon extends React.Component {
 			render() {
 				return (
 					<div>
-						<textarea className="form-control" placeholder="Write a comment..." />
-						<small>140 Remaining</small>
+						<span className="fa-stack fa-sm">
+							<i className="fa fa-circle fa-stack-2x blue-icon" />
+							<i className="fa fa-thumbs-up fa-stack-1x fa-inverse" />
+						</span>
+					</div>
+				)
+			}
+		}
+
+		class Like extends React.Component {
+			constructor() {
+				super()
+
+				this.state = {
+					liked: false
+				}
+				this.toggleLike = this.toggleLike.bind(this)
+			}
+
+			toggleLike() {
+				this.setState(previousState => ({
+					liked: !previousState.liked
+				}))
+			}
+
+			render() {
+				return (
+					<div>
+						{/* Include the LikeIcon subcomponent within the Like component*/}
+						{this.state.liked && <LikeIcon />}
+						<hr />
+						<div>
+							<button type="button"
+								className="btn no-outline btn-secondary"
+								onClick={this.toggleLike}>
+								<i
+									className="fa fa-thumbs-o-up fa-4 align-middle"
+									aria-hidden="true"
+								/>
+								&nbsp;
+								<span className="align-middle">Like</span>
+							</button>
+						</div>
+					</div>
+				)
+			}
+		}
+		class Comment extends React.Component {
+
+			constructor() {
+				super()
+				this.handleChange = this.handleChange.bind(this)
+				this.state = {
+					characterCount: 0
+				}
+			}
+
+			handleChange(event) {
+				this.setState({
+					characterCount: event.target.value.length
+				})
+			}
+
+			render() {
+				return (
+					<div>
+						<textarea className="form-control"
+							placeholder="Write a comment..."
+							onChange={this.handleChange} />
+						<small>{this.props.maxLetters - this.state.characterCount} Remaining</small>
 					</div>
 				)
 			}
@@ -84,7 +118,7 @@ class Like extends React.Component {
 								<Like />
 							</div>
 							<div className="card-footer text-muted">
-								<Comment />
+								<Comment maxLetters={280} />
 							</div>
 						</div>
 					</div>
