@@ -20,17 +20,16 @@
 
 	<script type="text/babel">
 
-		class LikeIcon extends React.Component {
-			render() {
-				return (
-					<div>
-						<span className="fa-stack fa-sm">
-							<i className="fa fa-circle fa-stack-2x blue-icon" />
-							<i className="fa fa-thumbs-up fa-stack-1x fa-inverse" />
-						</span>
-					</div>
-				)
-			}
+		// functional component
+		const LikeIcon = () => {
+			return (
+				<div>
+					<span className="fa-stack fa-sm">
+						<i className="fa fa-circle fa-stack-2x blue-icon" />
+						<i className="fa fa-thumbs-up fa-stack-1x fa-inverse" />
+					</span>
+				</div>
+			)
 		}
 
 		class Like extends React.Component {
