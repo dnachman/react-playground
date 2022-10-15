@@ -1,4 +1,5 @@
 import React from "react";
+import TestDriver from "./TestDriver";
 // import ReactDOM from "react-dom";
 
 class DisplayHTML extends React.Component {
@@ -27,7 +28,8 @@ function App() {
     return (
         <div className="App">
             <h1>Hello World</h1>
-            <DisplayHTML url="/file.html" />
+            {/* <DisplayHTML url="/file.html" /> */}
+            <TestDriver />
         </div>
     );
 }
