@@ -16,10 +16,16 @@ export default function TestDriver(props) {
                 //         throw `You can't use modules other than "react" in remote component.`;
                 // }
                 console.log(source);
-                const transformedSource = babel.transform(source, {
-                    presets: ["@bable/preset-react", "@babel/preset-env"],
+                const transformedSource = babel.transformSync(source, {
+                    presets: ["@babel/preset-react", "@babel/preset-env"],
+                    plugins: ["path-browserify"],
+                    targets: { chrome: "58" },
                     resolve: {
-                        fallback: { path: require.resolve("path-browserify") },
+                        fallback: {
+                            fs: false,
+                            path: false,
+                            os: false,
+                        },
                     },
                 }).code;
                 return transformedSource;
