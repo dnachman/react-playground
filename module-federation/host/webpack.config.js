@@ -7,7 +7,7 @@ module.exports = {
     entry: "./src/index",
     mode: "development",
     devServer: {
-        port: 3000,
+        port: 5001,
     },
     module: {
         rules: [
@@ -32,7 +32,7 @@ module.exports = {
         new ModuleFederationPlugin({
             name: "Host",
             remotes: {
-                Remote: `Remote@http://localhost:4000/moduleEntry.js`,
+                Remote: "Remote@http://localhost:4001/remoteEntry.js",
             },
             shared: {
                 ...dependencies,

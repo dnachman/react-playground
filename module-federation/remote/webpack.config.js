@@ -11,7 +11,7 @@ module.exports = {
         static: {
             directory: path.join(__dirname, "public"),
         },
-        port: 4000,
+        port: 4001,
     },
     module: {
         rules: [
@@ -34,8 +34,8 @@ module.exports = {
     },
     plugins: [
         new ModuleFederationPlugin({
-            name: "Remote",
-            filename: "moduleEntry.js",
+            name: "mf_david",
+            filename: "remoteEntry.js",
             exposes: {
                 "./App": "./src/App",
                 "./Button": "./src/Button",
